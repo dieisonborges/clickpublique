@@ -1,0 +1,19 @@
+{% if messages %}
+    <div class="col-md-12 mt-2 mb-2">
+        {% for message in messages  %}
+        <div class="alert {{ message.tags }} alert-dismissible fade show" role="alert" id="container-messages">
+            <strong>
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.DEBUG %}<i class="fa fa-bug"></i>{% endif %}
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.INFO %}<i class="fa fa-info"></i>{% endif %}
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}<i class="fa fa-check-circle"></i>{% endif %}
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}<i class="fa fa-exclamation-circle"></i>{% endif %}
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}<i class="fa fa-times-circle"></i>{% endif %}
+            </strong>
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+    </div>            
+{% endif %} 

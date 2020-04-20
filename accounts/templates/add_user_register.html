@@ -1,0 +1,145 @@
+{% load static %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AdminLTE 3 | Registration Page</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="https://adminlte.io/themes/v3/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="https://adminlte.io/themes/v3/dist/css/adminlte.min.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+
+
+</head>
+
+
+<body class="hold-transition register-page">
+    <div class="register-box">
+        <div class="register-logo mt-2">
+            <img src="{% static 'img/logo/logo-clickpublique-fundo-transp-horizontal.png' %}" alt="" width="300px">
+        </div>
+
+        <div class="card">
+            <div class="card-body register-card-body">
+                <p class="login-box-msg">Criar uma Conta</p>
+
+                {% include 'partials/messages.html' %}
+
+                <form action="." method="post">
+                    {% csrf_token %}
+                    <label for="{{ form.first_name.id_for_label }}">{{ form.first_name.label_tag }}</label>
+                    <div class="input-group mb-3">
+                        
+                        {{ form.first_name|add_class:"form-control"|attr:"autofocus" }}
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fa fa-user"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <label for="{{ form.last_name.id_for_label }}">{{ form.last_name.label_tag }}</label>
+                    <div class="input-group mb-3">
+                        {{ form.last_name|add_class:"form-control" }}
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fa fa-user"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <label for="{{ form.username.id_for_label }}">{{ form.username.label_tag }}</label>
+                    <div class="input-group mb-3">
+                        {{ form.username|add_class:"form-control" }}
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fa fa-user"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <label for="{{ form.email.id_for_label }}">{{ form.email.label_tag }}</label>
+                    <div class="input-group mb-3">
+                        {{ form.email|add_class:"form-control" }}
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fa fa-envelope"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <label for="{{ form.email.id_for_label }}">{{ form.password.label_tag }}</label>
+                    <div class="input-group mb-3">
+                        {{ form.password|add_class:"form-control"|attr:"type:password" }}
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fa fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">  
+                        <div class="col-12 mt-2 mb-2">
+                            <div class="icheck-primary">
+                                <input type="checkbox" id="agreeTerms" name="terms" value="agree" required >
+                                <label for="agreeTerms">
+                                    Concordo com os <a href="#">termos</a>
+                                </label>
+                            </div>
+                        </div>
+                        <!-- /.col -->
+
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-dark btn-block">
+                                <i class="fa fa-save"></i> Cadastrar
+                            </button>
+                        </div>
+                        <!-- /.col -->
+                        
+                    </div>
+                </form>
+
+                <br><br>
+
+                <a href="/" class="btn btn-secondary btn-xs float-right">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Já possuo um cadastro.
+                </a>
+            </div>
+            <!-- /.form-box -->
+        </div><!-- /.card -->
+    </div>
+    <!-- /.register-box -->
+
+    <!-- jQuery -->
+    <script src="https://adminlte.io/themes/v3/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="https://adminlte.io/themes/v3/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="https://adminlte.io/themes/v3/dist/js/adminlte.min.js"></script>
+
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#container-messages").removeClass("fade show");
+        });
+    </script>
+</body>
+
+</html>
+
