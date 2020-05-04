@@ -3,6 +3,9 @@
 ## Install Python 3.8
 > sudo apt install python3.8
 
+## Packs 
+> sudo apt-get install libpq-dev
+
 ## Create Virtual Enviroment
 > python3.8  -m venv clickpublique.com/venv/
 
@@ -12,6 +15,9 @@ alias deactivate-ckp="source ~/python_apps/clickpublique.com/venv/bin/deactivate
 
 ## Install Django (3.0.5)
 > pip install django
+
+## Install Pillow
+> pip install Pillow
 
 ## To verify enviroment
 > pip freeze

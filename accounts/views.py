@@ -9,6 +9,9 @@ from django.contrib.auth.forms import PasswordChangeForm
 from .models import UserProfile
 from django.core.exceptions import MultipleObjectsReturned
 from django.http import HttpResponseRedirect
+from django.db import IntegrityError
+import os, stat
+import shutil
 
 def add_user_register(request):
     template_name = 'add_user_register.html'
@@ -70,13 +73,16 @@ def add_user_profile(request):
     if request.method == 'POST':
         form = UserProfileForm(request.POST, request.FILES)
         try:
-            if form.is_valid():
+            if form.is_valid():                
                 f = form.save(commit=False)
                 f.user = request.user
                 f.save()
                 messages.success(request, 'Modificado com sucesso!')
+                return redirect('accounts:list_user_profile')
         except MultipleObjectsReturned:
             messages.error(request, 'Já existe um perfil!')
+        except IntegrityError:
+            messages.error(request, 'Você já tem um perfil cadastrado!')
     form = UserProfileForm()
     context['form'] = form
     return render(request, template_name, context)
@@ -93,8 +99,19 @@ def change_user_profile(request, username):
     profile = UserProfile.objects.get(user__username=username)
     if request.method == 'POST':
         form = UserProfileForm(request.POST, request.FILES, instance=profile)
+        #Remove archive old photo
+        
+        #old_profile.photo.delete(save=False)
+        #print(old_profile.__dict__)
+        #shutil.rmtree('/folder_name', ignore_errors=True)
+        #file_path = old_profile.photo
+        #print(os.path.join("sdfsdfsdf"))
         if form.is_valid():
-            form.save()
+            f = form.save(commit=False)            
+            if(request.FILES.get('photo')):
+                old_profile = UserProfile.objects.get(pk=form.initial['id'])
+                old_profile.photo.delete(save=False)          
+            f.save()
             messages.success(request, 'Modificado com sucesso!')
     form = UserProfileForm(instance=profile)
     context['form'] = form
