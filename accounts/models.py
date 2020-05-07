@@ -18,12 +18,16 @@ def photo_path(instance, filename):
 
 
 class UserProfile(models.Model):
-    upload_dir = uuid4().hex
+    #upload_dir = uuid4().hex
     #upload_dir += datetime.datetime.now()
     #photo = models.ImageField('Foto', upload_to=upload_dir)
     photo = models.ImageField('Foto', upload_to=photo_path, null=True)
     cell_phone = models.CharField('Celular', max_length=16)
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+
+    #Update and Create
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         verbose_name = 'Perfil do usuário'

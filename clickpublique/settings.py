@@ -54,6 +54,7 @@ THIRD_APPS = [
 PROJECT_APPS = [
     'core.apps.CoreConfig',    
     'accounts.apps.AccountsConfig',
+    'woocommerce.apps.WoocommerceConfig'
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_APPS + PROJECT_APPS

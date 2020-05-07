@@ -11,7 +11,8 @@ USER_INSTALL="dieison"
 NAME='wordpress1'
 WP_USER='admin_$NAME'
 WP_PASS='admin_wordpress1'
-DB_USER='$NAME'
+DB_USER=$NAME
+DB_NAME=$NAME
 DB_PASS='DB@#wordpress1'
 
 #API REST
@@ -28,16 +29,16 @@ echo "Install $NAME..."
 # Create Wordpress With CLI
 
 # Crie um banco de dados para sua instalação do WordPress:
-echo "Create database $NAME"
-mysql -e "CREATE DATABASE $NAME;"
+echo "Create database $DB_NAME"
+mysql -e "CREATE DATABASE $DB_NAME;"
 
 # Crie um usuário e senha
-echo "Create user $NAME"
+echo "Create user $DB_USER"
 mysql -e "CREATE USER '$DB_USER'@'localhost' IDENTIFIED BY '$DB_PASS';"
 
 # Configure o nome de usuário e a senha para o banco de dados:
-echo "Set Privileges for $NAME"
-mysql -e "GRANT ALL PRIVILEGES ON $NAME.* TO '$NAME'@'localhost';"
+echo "Set Privileges for $DB_USER"
+mysql -e "GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$DB_USER'@'localhost';"
 
 # Atualize os privilégios 
 echo "Reload Privileges"
@@ -98,9 +99,7 @@ su -c "cd /var/www/$NAME && wp core download" -s /bin/sh $USER_INSTALL
 
 # Adicionar as credenciais do banco de dados MySQL ao WordPress
 echo "Configure Core Wordpress"
-su -c "wp core config --dbname=$NAME --dbuser=$NAME --dbpass=$DB_PASS --dbhost=localhost --dbprefix=wp_" -s /bin/sh $USER_INSTALL
-
-
+su -c "wp core config --dbname=$DB_NAME --dbuser=$DB_USER --dbpass=$DB_PASS --dbhost=localhost --dbprefix=wp_" -s /bin/sh $USER_INSTALL
 
 # Adicione informações adicionais
 echo "Configure Aditional Info Wordpress"
